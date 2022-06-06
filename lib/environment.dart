@@ -36,7 +36,3 @@ class Environment {
     'Content-Type': 'application/json'
   };
 }
-
-mixin Keys {
-  static var API_KEY;
-}

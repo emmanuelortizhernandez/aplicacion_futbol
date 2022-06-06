@@ -54,19 +54,17 @@ class _LeagueDetailsScreenState extends State<LeagueDetailsScreen> {
   void dispose() {
     super.dispose();
     _fixturesProvider.stopFetchingFixtures();
-    }
-
+  }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
         _fixturesProvider.stopFetchingFixtures();
         return true;
       },
-
       child: ChangeNotifierProvider(
-        create: (_) => _fixturesProvider,
+        builder: (_) => _fixturesProvider,
         child: Scaffold(
           body: PageStorage(
             bucket: storageBucket,
@@ -75,31 +73,29 @@ class _LeagueDetailsScreenState extends State<LeagueDetailsScreen> {
           bottomNavigationBar: BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
-                backgroundColor: Colors.deepOrange,
-                icon: Icon(Icons.calendar_today),
-                label: 'Today'
-              ),
-               BottomNavigationBarItem(
-                backgroundColor: Colors.deepOrange,
-                icon: Icon(Icons.equalizer),
-                label: 'Ranking'
-              ),
+                  backgroundColor: Colors.deepOrange,
+                  icon: Icon(Icons.calendar_today),
+                  title: Text('Today')),
+              BottomNavigationBarItem(
+                  backgroundColor: Colors.deepOrange,
+                  icon: Icon(Icons.equalizer),
+                  title: Text('Ranking')),
               BottomNavigationBarItem(
                 backgroundColor: Colors.deepOrange,
                 icon: Icon(Icons.supervisor_account),
-                label: 'Today'
+                title: Text('Top scorers'),
               ),
               BottomNavigationBarItem(
                 backgroundColor: Colors.deepOrange,
                 icon: Icon(Icons.table_chart),
-                label: 'Table'
+                title: Text('Table'),
               ),
             ],
             currentIndex: _navigationIndex,
             onTap: (value) {
-              setState((){
+              setState(() {
                 _navigationIndex = value;
-                currentPage = pages[_navigationIndex]; 
+                currentPage = pages[_navigationIndex];
               });
             },
           ),
@@ -107,5 +103,4 @@ class _LeagueDetailsScreenState extends State<LeagueDetailsScreen> {
       ),
     );
   }
-
-}   
+}

@@ -13,35 +13,32 @@ class League {
   int isCurrent;
 
   League(
-      {
-        required this.leagueId,
-        required this.name,
-        required this.type,
-        required this.country,
-        required this.countryCode,
-        required this.season,
-        required this.seasonStart,
-        required this.seasonEnd,
-        required this.logo,
-        required this.flag,
-        required this.standings,
-        required this.isCurrent});
+      {this.leagueId,
+        this.name,
+        this.type,
+        this.country,
+        this.countryCode,
+        this.season,
+        this.seasonStart,
+        this.seasonEnd,
+        this.logo,
+        this.flag,
+        this.standings,
+        this.isCurrent});
 
-  factory League.fromJson(Map<String, dynamic> json) {
-    return League(
-      leagueId: json['leagueId'],
-      name: json['name'], 
-      type: json['type'],
-      country: json['country'],
-      countryCode: json['countryCode'],
-      season: json['season'],
-      seasonStart: json['seasonStart'],
-      seasonEnd: json['seasonEnd'],
-      logo: json['logo'],
-      flag: json['flag'],
-      standings: json['standings'],
-      isCurrent: json['isCurrent'],
-      );
+  League.fromJson(Map<String, dynamic> json) {
+    leagueId = json['league_id'];
+    name = json['name'];
+    type = json['type'];
+    country = json['country'];
+    countryCode = json['country_code'];
+    season = json['season'];
+    seasonStart = json['season_start'];
+    seasonEnd = json['season_end'];
+    logo = json['logo'];
+    flag = json['flag'];
+    standings = json['standings'];
+    isCurrent = json['is_current'];
   }
 
   Map<String, dynamic> toJson() {

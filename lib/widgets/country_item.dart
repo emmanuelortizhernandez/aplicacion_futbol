@@ -61,7 +61,7 @@ class _CountryItemState extends State<CountryItem> {
                       widget._country.country == 'World'
                           ? 'Wolrd, World cup and stuff'
                           : widget._country.country,
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.body2,
                     ),
                   ),
                   Consumer<LeaguesProvider>(builder: (BuildContext context,

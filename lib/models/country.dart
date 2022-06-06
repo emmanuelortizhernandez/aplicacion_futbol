@@ -1,18 +1,14 @@
-import 'dart:convert';
-
 class Country {
-  String? country;
+  String country;
   String code;
   String flag;
 
-  Country({required this.country, required this.code, required this.flag});
-  
-  factory Country.fromJson(Map<String, dynamic> json) {
-    return Country(
-      country: json['country'], 
-      code: json['code'],
-      flag: json['flag'],
-      );
+  Country({this.country, this.code, this.flag});
+
+  Country.fromJson(Map<String, dynamic> json) {
+    country = json['country'];
+    code = json['code'];
+    flag = json['flag'];
   }
 
   Map<String, dynamic> toJson() {

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:kick_start/providers/auth_provider.dart';
 import 'package:kick_start/providers/team_provider.dart';
 import 'package:kick_start/screens/auth_screen.dart';
+import 'package:kick_start/screens/player_details.dart';
 import 'package:kick_start/screens/team_details.dart';
 import 'package:kick_start/screens/wrapper.dart';
 import 'package:provider/provider.dart';
@@ -46,25 +47,33 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => _authProvider,
+          builder: (_) => _authProvider,
         ),
         ChangeNotifierProvider(
-          create: (_) => _countriesProvider,
+          builder: (_) => _countriesProvider,
         ),
         ChangeNotifierProvider(
-          create: (_) => _leaguesProvider,
+          builder: (_) => _leaguesProvider,
         ),
         ChangeNotifierProvider(
-          create: (_) => _standingsProvider,
+          builder: (_) => _standingsProvider,
+        ),
+        ChangeNotifierProxyProvider<StandingsProvider, PlayersProvider>(builder:
+            (BuildContext context, StandingsProvider standingsProvider,
+                PlayersProvider oldPlayersProvider) {
+          return PlayersProvider(
+              oldPlayersProvider == null ? [] : oldPlayersProvider.topScorers,
+              standingsProvider.fetchStandingsForLeague,
+              standingsProvider.standings);
+        }),
+        ChangeNotifierProvider(
+          builder: (_) => _fixturesProvider,
         ),
         ChangeNotifierProvider(
-          create: (_) => _fixturesProvider,
+          builder: (_) => _activeFixtureProvider,
         ),
         ChangeNotifierProvider(
-          create: (_) => _activeFixtureProvider,
-        ),
-        ChangeNotifierProvider(
-          create: (_) => _teamProvider,
+          builder: (_) => _teamProvider,
         ),
       ],
       child: MaterialApp(
@@ -72,16 +81,16 @@ class App extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.deepOrange,
           textTheme: TextTheme(
-            subtitle1: TextStyle(
+            title: TextStyle(
               color: Colors.white,
               fontSize: 32,
               fontWeight: FontWeight.bold,
             ),
-            bodyText1: TextStyle(
+            body1: TextStyle(
               color: Colors.black54,
               fontSize: 20,
             ),
-            bodyText2: TextStyle(
+            body2: TextStyle(
               color: Colors.black,
               fontSize: 18,
             ),

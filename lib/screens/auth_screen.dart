@@ -46,7 +46,7 @@ class _AuthScreenState extends State<AuthScreen> {
 //                  ),
                 child: FlutterLogo(
                   size: 200,
-                  textColor: Colors.deepOrange,
+                  colors: Colors.deepOrange,
                 ),
               ),
               MaterialButton(
